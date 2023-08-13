@@ -1,0 +1,41 @@
+Question-->  https://practice.geeksforgeeks.org/problems/print-common-nodes-in-bst/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article
+
+class Solution
+{
+    //Function to find the nodes that are common in both BST.
+	public static ArrayList<Integer> findCommon(Node root1,Node root2)
+    {
+        //code here
+            ArrayList<Integer> a1 = new ArrayList<Integer>();
+        HashSet<Integer> s = new HashSet<>();
+        ArrayList<Integer> a2 = new ArrayList<Integer>();
+        if(root1 == null || root2==null)
+            return a1;
+        Queue<Node>q1 = new LinkedList<Node>();
+        q1.add(root1);
+        while(!q1.isEmpty())
+        {
+            Node curr = q1.poll();
+            s.add(curr.data);
+            if(curr.left != null)
+                q1.add(curr.left);
+            if(curr.right != null)
+                q1.add(curr.right);
+        }
+        
+        Queue<Node>q2 = new LinkedList<Node>();
+        q2.add(root2);
+        while(!q2.isEmpty())
+        {
+            Node curr = q2.poll();
+            if(s.contains(curr.data))
+                a1.add(curr.data);
+            if(curr.left != null)
+                q2.add(curr.left);
+            if(curr.right != null)
+                q2.add(curr.right);
+        }
+        Collections.sort(a1);
+        return a1;
+    }
+}
